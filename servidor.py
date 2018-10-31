@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 import mysql.connector
 from usuario import Usuario 
 
@@ -9,9 +9,11 @@ cursor = conexion.cursor()
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/home/")
 def hello():
-    return "Hello World!"
+	respuesta = make_response("Hello World!")
+	respuesta.headers.add('Access-Control-Allow-Origin','*')
+	return respuesta
 
 @app.route("/login/",methods=['GET'])
 def login():
